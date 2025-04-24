@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>oosa.me - プロダクトメモ</title>
+    <style>
+      :root {
+        --primary: #4f46e5;
+        --primary-light: #6366f1;
+        --secondary: #f97316;
+        --dark: #1e293b;
+        --light: #f8fafc;
+        --success: #10b981;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+        --gray-100: #f3f4f6;
+        --gray-200: #e5e7eb;
+        --gray-300: #d1d5db;
+        --gray-400: #9ca3af;
+        --gray-500: #6b7280;
+        --gray-600: #4b5563;
+        --gray-700: #374151;
+        --gray-800: #1f2937;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+          "Helvetica Neue", sans-serif;
+      }
+
+      body {
+        background-color: var(--light);
+        color: var(--dark);
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+        position: relative;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.5rem 0;
+        border-bottom: 1px solid var(--gray-200);
+        margin-bottom: 2rem;
+      }
+
+      .logo {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--primary);
+        letter-spacing: -0.05em;
+        display: flex;
+        align-items: center;
+      }
+
+      .logo span {
+        color: var(--secondary);
+      }
+
+      .badge {
+        background-color: var(--gray-100);
+        color: var(--primary);
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        margin-left: 1rem;
+      }
+
+      .section {
+        background-color: white;
+        border-radius: 1rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 6px;
+        height: 100%;
+        background-color: var(--primary);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+        color: var(--dark);
+      }
+
+      h2 {
+        font-size: 1.75rem;
+        color: var(--primary);
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--gray-200);
+        margin-top: 2rem;
+      }
+
+      h3 {
+        font-size: 1.25rem;
+        color: var(--gray-700);
+        margin-top: 1.5rem;
+      }
+
+      p {
+        margin-bottom: 1rem;
+        color: var(--gray-700);
+      }
+
+      ul,
+      ol {
+        margin-left: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .card {
+        background-color: white;
+        border-radius: 0.75rem;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+          0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        padding: 1.5rem;
+        border: 1px solid var(--gray-200);
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+
+      .card h4 {
+        font-size: 1.1rem;
+        color: var(--primary);
+        margin-bottom: 0.75rem;
+      }
+
+      .icon {
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--primary-light);
+        color: white;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+      }
+
+      .table-container {
+        overflow-x: auto;
+        margin-bottom: 1.5rem;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+      }
+
+      th,
+      td {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--gray-200);
+      }
+
+      th {
+        background-color: var(--gray-100);
+        font-weight: 600;
+        color: var(--gray-700);
+      }
+
+      tr:hover {
+        background-color: var(--gray-50);
+      }
+
+      .tag {
+        display: inline-block;
+        background-color: var(--gray-100);
+        color: var(--gray-700);
+        font-size: 0.75rem;
+        font-weight: 500;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .tag-primary {
+        background-color: rgba(79, 70, 229, 0.1);
+        color: var(--primary);
+      }
+
+      .tag-secondary {
+        background-color: rgba(249, 115, 22, 0.1);
+        color: var(--secondary);
+      }
+
+      .tag-success {
+        background-color: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+      }
+
+      .divider {
+        height: 1px;
+        background-color: var(--gray-200);
+        margin: 2rem 0;
+      }
+
+      .highlight {
+        background-color: rgba(79, 70, 229, 0.05);
+        border-left: 3px solid var(--primary);
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .highlight h4 {
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .milestone-table td:first-child {
+        font-weight: 600;
+        color: var(--gray-700);
+      }
+
+      footer {
+        text-align: center;
+        padding: 2rem 0;
+        color: var(--gray-500);
+        font-size: 0.875rem;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 1rem;
+        }
+
+        .section {
+          padding: 1.5rem;
+        }
+
+        .card-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo">
+          oosa<span>.me</span>
+          <div class="badge">内部メモ</div>
+        </div>
+      </header>
+
+      <section class="section">
+        <h1>オープン・ソーシャル・アクション プロダクトコンセプト</h1>
+        <p>以下のメモは、チーム内でプロダクト案を共有するための資料です。</p>
+
+        <h2>Core</h2>
+
+        <h3>プロダクトの世界観</h3>
+        <p>
+          行きたいお店をストックし、仲間とシームレスに共有・プランニングし、そのまま予約まで完結できるプラットフォーム
+        </p>
+
+        <h3>ミッション</h3>
+        <p>
+          ユーザーが「行きたいお店」を気軽にクリップし、グループで共有・相談できる場を１日でプロトタイプとして実現すること
+        </p>
+
+        <h3>ビジョン</h3>
+        <p>
+          いつでもどこでも、仲間と一緒に行きたい場所をまとめて予約まで行える、日常のおでかけプランニングのデファクト・スタンダードになる
+        </p>
+
+        <h3>事業戦略</h3>
+        <ul>
+          <li>２人チームで１日ハッカソン形式によりMVPを迅速構築・デモ公開</li>
+          <li>面白ければ継続開発フェーズへ移行し、正式リリースを目指す</li>
+          <li>
+            ドメインは oosa.me（または food.oosa.me）で、覚えやすいブランド展開
+          </li>
+          <li>
+            フリーミアムモデル：無料３グループまで、プレミアムプランで収益化
+          </li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Why</h2>
+
+        <h3>ターゲットユーザー</h3>
+        <p>
+          20～40代の友人や家族とおでかけプランを気軽に共有したいカジュアルユーザー
+        </p>
+
+        <h3>ペインとゲイン</h3>
+
+        <div class="highlight">
+          <h4>Pain</h4>
+          <ul>
+            <li>Instagramなどの「保存」は個人向けで共有に手間</li>
+            <li>リスト管理と予約が異なるサービスに分散して面倒</li>
+            <li>「前に共有してくれてたけど、何だったっけ？」と再確認が発生</li>
+          </ul>
+        </div>
+
+        <div class="highlight">
+          <h4>Gain</h4>
+          <ul>
+            <li>一つのサービス上でストック→共有→予約が完結</li>
+            <li>グループやカテゴリで整理しやすく、プランニングが楽しくなる</li>
+            <li>
+              過去に共有されたアイテムを一覧・検索でき、再確認フローが不要に
+            </li>
+          </ul>
+        </div>
+
+        <h3>市場分析</h3>
+        <ul>
+          <li>SNSブックマーク・おでかけ計画市場は拡大中</li>
+          <li>
+            既存SNSは共有機能に最適化されておらず、専用プランニングツールにニーズあり
+          </li>
+        </ul>
+
+        <h3>競合分析</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>競合</th>
+                <th>強み</th>
+                <th>弱み</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Instagram 保存機能</td>
+                <td>多くのユーザー基盤</td>
+                <td>共有や予約機能が未整備</td>
+              </tr>
+              <tr>
+                <td>Pinterest</td>
+                <td>豊富なビジュアルブックマーク機能</td>
+                <td>おでかけプランニング向けではない</td>
+              </tr>
+              <tr>
+                <td>ぐるなび／TableCheck</td>
+                <td>予約ネットワーク強固</td>
+                <td>リスト共有・整理機能が限定的</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>What</h2>
+
+        <h3>メンタルモデル</h3>
+        <p>
+          「お気に入りクリップ」→「グループ分け」→「みんなと共有」→「予約ボタン」<br />
+          ＋「過去に共有されたアイテムをワンクリックで再表示」
+        </p>
+
+        <h3>カスタマージャーニー</h3>
+
+        <div class="card-grid">
+          <div class="card">
+            <div class="icon">1</div>
+            <h4>ドメイン取得＆環境準備</h4>
+            <p>oosa.me／food.oosa.me を設定</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">2</div>
+            <h4>探索・保存</h4>
+            <p>気になるお店を検索してストック</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">3</div>
+            <h4>整理</h4>
+            <p>食べ物／カフェなどカテゴリ＆グループで分類</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">4</div>
+            <h4>共有</h4>
+            <p>最大３グループまで無料で相談・リンク共有</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">5</div>
+            <h4>履歴確認</h4>
+            <p>過去共有リストからワンクリックで再表示</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">6</div>
+            <h4>予約</h4>
+            <p>提携予約サービス経由で日時指定</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">7</div>
+            <h4>来店＆レビュー</h4>
+            <p>来店後にフィードバックを投稿</p>
+          </div>
+        </div>
+
+        <h3>コスト構造</h3>
+        <ul>
+          <li>SaaSus Platform利用料</li>
+          <li>AWS（DynamoDB・Lambda・CDN等）運用コスト</li>
+          <li>ハッカソン運営コスト</li>
+        </ul>
+
+        <h3>収益モデル</h3>
+        <ul>
+          <li><strong>Freemium</strong>：無料３グループまで</li>
+          <li>
+            <strong>プレミアムプラン</strong
+            >：グループ無制限＋追加機能（月額／年額）
+          </li>
+        </ul>
+
+        <h3>指標</h3>
+        <div class="tag-container">
+          <span class="tag tag-primary">ハッカソン当日のMVP完成度</span>
+          <span class="tag tag-secondary">MAU（Monthly Active Users）</span>
+          <span class="tag tag-success">グループ作成数／参加率</span>
+          <span class="tag tag-primary">有料プラン転換率</span>
+        </div>
+
+        <h3>マイルストーン</h3>
+        <div class="table-container">
+          <table class="milestone-table">
+            <thead>
+              <tr>
+                <th>期間</th>
+                <th>マイルストーン</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ハッカソン当日</td>
+                <td>２人チームでMVP開発・デモ公開</td>
+              </tr>
+              <tr>
+                <td>１週間以内</td>
+                <td>フィードバック収集・継続開発可否判断</td>
+              </tr>
+              <tr>
+                <td>１～３ヶ月</td>
+                <td>履歴機能を含む必要機能の追加開発＆正式リリース準備</td>
+              </tr>
+              <tr>
+                <td>４～６ヶ月</td>
+                <td>SNS連携強化・ユーザー招待キャンペーン・海外展開検討</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>How</h2>
+
+        <h3>ユーザーインターフェース</h3>
+        <ul>
+          <li>ドメイン：oosa.me／food.oosa.me</li>
+          <li>Web SPA（React/Vue）＋モバイルビュー最適化</li>
+          <li>ドラッグ＆ドロップでグループ・カテゴリを編集</li>
+          <li>
+            <strong>履歴タブ</strong
+            >：過去に共有したアイテムを時系列／グループ別に参照可能
+          </li>
+        </ul>
+
+        <h3>設計と実装</h3>
+        <ul>
+          <li>
+            <strong>開発形式</strong
+            >：２人チームによる１日ハッカソン形式＋継続開発フェーズ移行
+          </li>
+          <li>
+            <strong>バックエンド</strong>：SaaSus Platform ＋ DynamoDB ＋ AWS
+            Lambda/API Gateway
+          </li>
+          <li>
+            <strong>フロントエンド</strong>：SaaSus提供UIキット ＋
+            SPAフレームワーク
+          </li>
+          <li>
+            <strong>インフラ</strong>：CDK／TerraformでInfrastructure as Code
+          </li>
+        </ul>
+
+        <h3>Go To Market</h3>
+        <ul>
+          <li>ドメイン oosa.me を活用した「お納めください」キャンペーン</li>
+          <li>ハッカソン当日デモ動画公開＆SNSシェア拡散</li>
+          <li>早期ユーザー招待でグループ枠拡張キャンペーン</li>
+          <li>インフルエンサータイアップ、食／旅行メディアで記事掲載</li>
+        </ul>
+      </section>
+
+      <footer>
+        <p>© 2025 oosa.me チーム - 内部共有資料</p>
+      </footer>
+    </div>
+  </body>
+</html>
